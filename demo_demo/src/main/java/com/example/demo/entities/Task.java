@@ -6,6 +6,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.Temporal;
 
 @Entity
 public class Task {
@@ -23,7 +26,9 @@ public class Task {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotBlank(message = "Task name connot be empty")
 	private String name;
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date creationDate;
 	private boolean compeleted;
 
