@@ -9,5 +9,4 @@ import com.example.demo.entities.Task;
 
 public interface TaskRepository extends CrudRepository<Task, Long> {
 	List<Task> findAll(); 
-	List<Task> findByStatus(boolean status);
 }
