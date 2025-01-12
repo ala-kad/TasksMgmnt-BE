@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,40 +18,45 @@ import org.springframework.web.server.ResponseStatusException;
 import com.example.demo.entities.Task;
 import com.example.demo.repositories.TaskRepository;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/v1/")
+@RequestMapping("/tasks")
 public class TaskController {
 	@Autowired
 	private TaskRepository taskRepo;
 	
-	@GetMapping("/tasks")
+	@GetMapping
 	public ResponseEntity<List<Task>> getAllTasks(){
 		List<Task>  tasks = taskRepo.findAll();
+		if(tasks.isEmpty()) {
+			return ResponseEntity.noContent().build();
+		}
 		return ResponseEntity.ok(tasks);
 	}
 	
-	@PostMapping("/tasks")
-	public ResponseEntity<Task> createTask(@RequestBody Task task){
+	@PostMapping
+	public ResponseEntity<Task> createTask(@RequestBody @Valid Task task){
+		task.setCreationDate(LocalDateTime.now());	
 		Task t = taskRepo.save(task);
 		return ResponseEntity.status(HttpStatus.CREATED).body(t);
 	}
 	
-	@PutMapping("tasks/{id}")
-	public ResponseEntity<Task> updateTask(@PathVariable Long id, Task task){
+	@PutMapping("/{id}")
+	public ResponseEntity<Task> updateTask(@PathVariable Long id, @Valid Task task){
 		Task t = taskRepo.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found"));
 		
 		t.setName(task.getName());
 		t.setCreationDate(task.getCreationDate());
-		t.setCompeleted(task.isCompeleted());
+		t.setCompleted(task.isCompleted());
 		Task updatedTask = taskRepo.save(t);
 		
 		return ResponseEntity.ok(updatedTask);
 	}
 	
-	@DeleteMapping("/tasks/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
 	    if (taskRepo.existsById(id)) {
 	        taskRepo.deleteById(id);
