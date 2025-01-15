@@ -47,18 +47,3 @@ The request body should be a JSON object representing the task data. The expecte
   * This is a basic example and does not implement user authentication or authorization.
   * In-memory database (H2) is used for simplicity during development. You can configure a production-grade database like PostgreSQL for real-world deployments.
   * Basic error handling is implemented using `ResponseStatusException`. You can extend this for more specific error messages.
-
-## Next Steps
-
-  * Implement user authentication and authorization for secure access control.
-  * Integrate with a production-grade database like PostgreSQL for scalability and persistence.
-  * Enhance error handling to provide more informative messages to the client.
-  * Add additional features like task deadlines, categories, priorities, or due dates.
-
-## Contributing
-
-We welcome contributions to this project\! If you have any bug fixes, improvements, or new features, feel free to create a pull request.
-
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
