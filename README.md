@@ -15,7 +15,6 @@ This document describes a Spring Boot application that provides a REST API for m
 1. Clone this repository.
 2. Open a terminal in the project directory.
 3. Run `mvn clean install` to build the application.
-4. 
 5. Run `mvn spring-boot:run` to start the application.
 
 **By default, the application will run on port 8080.** You can access the API endpoints at `http://localhost:8080/tasks`.
