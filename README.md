@@ -41,9 +41,3 @@ The request body should be a JSON object representing the task data. The expecte
 {
   "name": "string",
 }
-
-## Assumptions and Trade-offs
-
-  * This is a basic example and does not implement user authentication or authorization.
-  * In-memory database (H2) is used for simplicity during development. You can configure a production-grade database like PostgreSQL for real-world deployments.
-  * Basic error handling is implemented using `ResponseStatusException`. You can extend this for more specific error messages.
